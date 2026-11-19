@@ -1127,7 +1127,11 @@ void EnergomeraIecComponent::unlock_uart_session_() {
 
 uint8_t EnergomeraIecComponent::next_obj_id_ = 0;
 
-std::string EnergomeraIecComponent::generateTag() { return str_sprintf("%s%03d", TAG0, ++next_obj_id_); }
+std::string EnergomeraIecComponent::generateTag() {
+  char buf[32];
+  snprintf(buf, sizeof(buf), "%s%03d", TAG0, ++next_obj_id_);
+  return std::string(buf);
+}
 
 }  // namespace energomera_iec
 }  // namespace esphome
